@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { inputValue: '' };
+  }
+
+  onChangeInputValue = (e) => {
+    this.setState({ inputValue: e.target.value });
+  };
+
+  render() {
+    return (
+      <>
+        <input
+          type="text"
+          value={this.state.inputValue}
+          onChange={this.onChangeInputValue}
+        />
+        <Bomb inputValue={this.state.inputValue} />
+      </>
+    );
+  }
 }
 
-export default App;
+const Bomb = (props) => {
+  if (props.inputValue === 'bomb') {
+    throw new Error('oops something went wrong');
+  }
+
+  return <>{props.inputValue}</>;
+};
