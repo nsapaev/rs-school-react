@@ -18,7 +18,8 @@ export class CallError extends React.Component {
           flexDirection: 'column',
           alignItems: 'end',
           justifyContent: 'end',
-          margin: '20px',
+          marginTop: '20px',
+          maxWidth: '1200px',
         }}
       >
         <button
@@ -31,6 +32,8 @@ export class CallError extends React.Component {
             width: '150px',
             background: '#D84444',
             color: 'white',
+            border: 'none',
+            borderRadius: '5px',
           }}
         >
           Error Trigger Button

@@ -52,7 +52,9 @@ export class SearchComponent extends React.Component {
               value={this.state.inputValue}
               onChange={this.onChangeInputValue}
             />
-            <button onClick={this.onSendSearchValue}>search</button>
+            <button className={S.customButton} onClick={this.onSendSearchValue}>
+              search
+            </button>
           </div>
         </div>
 
