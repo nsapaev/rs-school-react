@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/rs-school-react/static/css/main.b90c3309.css",
-    "main.js": "/rs-school-react/static/js/main.6205f9a2.js",
+    "main.css": "/rs-school-react/static/css/main.de0af527.css",
+    "main.js": "/rs-school-react/static/js/main.42435c7b.js",
     "static/js/453.173790dc.chunk.js": "/rs-school-react/static/js/453.173790dc.chunk.js",
     "static/media/Gear@1x-0.2s-200px-200px.svg": "/rs-school-react/static/media/Gear@1x-0.2s-200px-200px.d0bb49fe4e1630ca69afe350dcc30a2e.svg",
     "index.html": "/rs-school-react/index.html",
-    "main.b90c3309.css.map": "/rs-school-react/static/css/main.b90c3309.css.map",
-    "main.6205f9a2.js.map": "/rs-school-react/static/js/main.6205f9a2.js.map",
+    "main.de0af527.css.map": "/rs-school-react/static/css/main.de0af527.css.map",
+    "main.42435c7b.js.map": "/rs-school-react/static/js/main.42435c7b.js.map",
     "453.173790dc.chunk.js.map": "/rs-school-react/static/js/453.173790dc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b90c3309.css",
-    "static/js/main.6205f9a2.js"
+    "static/css/main.de0af527.css",
+    "static/js/main.42435c7b.js"
   ]
 }
