@@ -14,7 +14,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "prettier": "prettier --write .",
+    "prettier:fix": "prettier --write .",
     "lint": "eslint . --fix",
     "start": "react-scripts start",
     "build": "react-scripts build",
