@@ -3,9 +3,10 @@
 ![image](https://github.com/user-attachments/assets/c703fba2-3622-4cb4-81f1-428cd9ab54d5)
 ![image](https://github.com/user-attachments/assets/d9e2506d-430c-43ef-9799-24c31ac3ee0a)
 ![image](https://github.com/user-attachments/assets/0c5ac54b-a52c-449c-839e-706b02394879)
-3. undeployed 
-4. 02.02.2025/02.02.2025
-5. Score 75/100
+3. undeployed  
+4. 02.02.2025 / 02.02.2025  
+5. Score 75/100  
+
 
 - [ ] Eslint is set up. Command `npm run lint`
 - [x] Prettier is set up, `format:fix` command fixes issues
