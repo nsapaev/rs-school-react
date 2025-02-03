@@ -1,7 +1,18 @@
 import React from 'react';
 import S from './table.module.css';
 
-export class Table extends React.Component {
+interface TablePropsInterface {
+  tableData: Array<{
+    name: string;
+    birth_year: string;
+    gender: string;
+    height: string;
+    hair_color: string;
+    eye_color: string;
+  }>;
+}
+
+export class Table extends React.Component<TablePropsInterface, {}> {
   constructor(props) {
     super(props);
   }

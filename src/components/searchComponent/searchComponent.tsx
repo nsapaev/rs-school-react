@@ -5,7 +5,17 @@ import { Table } from '../table/table';
 import { Loader } from '../Loader/loader';
 import { CallError } from '../CallError/callError';
 
-export class SearchComponent extends React.Component {
+interface SearchComponentPropsInterface {}
+interface SearchComponentStateInterface {
+  inputValue: string;
+  fetchResult: [];
+  isLoading: boolean;
+}
+
+export class SearchComponent extends React.Component<
+  SearchComponentPropsInterface,
+  SearchComponentStateInterface
+> {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +30,7 @@ export class SearchComponent extends React.Component {
 
   componentDidMount() {
     const lSValue = localStorage.getItem('inputValue');
-    fetchRequest(lSValue).then((data) => {
+    fetchRequest(lSValue ?? '').then((data) => {
       this.setState({ ...this.state, fetchResult: data });
     });
   }

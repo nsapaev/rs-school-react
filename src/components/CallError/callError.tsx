@@ -1,6 +1,10 @@
 import React from 'react';
 
-export class CallError extends React.Component {
+interface CallErrorStateInterface {
+  hasError: boolean;
+}
+
+export class CallError extends React.Component<{}, CallErrorStateInterface> {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
