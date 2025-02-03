@@ -1,50 +1,15 @@
-# React + TypeScript + Vite
+1.  [a Task link ](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/class-components.md#react-project-setup-class-components-error-boundary)
+2.  ![image](https://github.com/user-attachments/assets/c703fba2-3622-4cb4-81f1-428cd9ab54d5)
+    ![image](https://github.com/user-attachments/assets/d9e2506d-430c-43ef-9799-24c31ac3ee0a)
+    ![image](https://github.com/user-attachments/assets/0c5ac54b-a52c-449c-839e-706b02394879)
+3.  undeployed
+4.  02.02.2025 / 02.02.2025
+5.  Score 100/100
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- [x] Eslint is set up. Command `npm run lint`
+- [x] Prettier is set up, `format:fix` command fixes issues
+- [x] Husky is set up, linting is run on pre-commit
+- [x] Page is split into at least two sections
+- [x] When user types something into the Search input and clicks "Search" button, a skeleton is displayed and the list is changed according to the response results for a provided search term
+- [x] The search term typed into the Search input is saved in the LS when user clicks on "Search" button
+- [x] Application is wrapped with `ErrorBoundary`, which logs errors to the console and shows a fallback UI. There should be a button to throw an error
