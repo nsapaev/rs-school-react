@@ -7,9 +7,10 @@
 4. 02.02.2025/02.02.2025
 5. Score 75/100
 
-[] Eslint is set up. command npm run lint
-[x] Prettier is set up, format:fix command fixes issues
-[] Husky is set up, linting is run on pre-commit
-[x] Page is split into at least two sections
-[x] When user types something to the Search input and clicks "Search" button, a skeleton is displayed and the list is changed according to the response results for a provided search term The search term typed into the Search input is saved in the LS when user clicks on "Search" button
-[x] Application is wrapped with ErrorBoundary, which logs error to a console and shows a fallback UI. There should be a button to throw an error
+- [ ] Eslint is set up. Command `npm run lint`
+- [x] Prettier is set up, `format:fix` command fixes issues
+- [ ] Husky is set up, linting is run on pre-commit
+- [x] Page is split into at least two sections
+- [x] When user types something into the Search input and clicks "Search" button, a skeleton is displayed and the list is changed according to the response results for a provided search term
+- [x] The search term typed into the Search input is saved in the LS when user clicks on "Search" button
+- [x] Application is wrapped with `ErrorBoundary`, which logs errors to the console and shows a fallback UI. There should be a button to throw an error
