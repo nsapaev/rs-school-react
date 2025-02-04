@@ -4,7 +4,6 @@ import style from './App.module.css';
 import { SearchComponent } from './components/SearchComponent';
 import { Table } from './components/Table';
 import { fetchRequest } from './helpers/helpers';
-import { FallBack } from './components/FallBack';
 import { CallError } from './components/CallError';
 import { Loader } from './components/Loader';
 
@@ -92,7 +91,7 @@ class App extends Component<unknown, SearchComponentState> {
         </header>
 
         <main>
-          {!!this.state.fetchResult.length ? (
+          {this.state.fetchResult.length ? (
             <Table tableData={this.state.fetchResult} />
           ) : (
             !this.state.isLoading && (
