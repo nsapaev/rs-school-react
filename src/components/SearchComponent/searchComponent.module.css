@@ -1,0 +1,28 @@
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+input {
+  width: 300px;
+  height: 50px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.customButton {
+  cursor: pointer;
+  width: 100px;
+  background: #ffde31;
+  height: 50px;
+  padding: 0px 10px 0px 10px;
+  gap: 10px;
+  border-radius: 4px;
+  opacity: 0px;
+  border: none;
+}
