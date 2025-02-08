@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, createContext, useEffect, useState } from 'react';
 
 import style from './App.module.css';
 import { SearchComponent } from './components/SearchComponent';
@@ -6,109 +6,100 @@ import { Table } from './components/Table';
 import { fetchRequest } from './helpers/helpers';
 import { CallError } from './components/CallError';
 import { Loader } from './components/Loader';
+import { Routes, Route } from 'react-router';
+
+interface FetchResultInterface {
+  name: string;
+  birth_year: string;
+  gender: string;
+  height: string;
+  hair_color: string;
+  eye_color: string;
+}
 
 interface SearchComponentState {
   inputValue: string;
-  fetchResult: Array<{
-    name: string;
-    birth_year: string;
-    gender: string;
-    height: string;
-    hair_color: string;
-    eye_color: string;
-  }>;
+  fetchResult: Array<FetchResultInterface>;
   isLoading: boolean;
   searchedValue: string;
 }
 
-class App extends Component<unknown, SearchComponentState> {
-  constructor(props: object) {
-    super(props);
-    const savedInputValue = localStorage.getItem('inputValue');
-    this.state = {
-      inputValue: savedInputValue ?? '',
-      fetchResult: [],
-      isLoading: false,
-      searchedValue: '',
-    };
-  }
+const savedInputValue = localStorage.getItem('inputValue') || '';
 
-  componentDidMount() {
-    const lSValue = localStorage.getItem('inputValue');
-    this.setState({ isLoading: true });
-
-    fetchRequest(lSValue ?? '')
+const App: React.FC = () => {
+  const [inputValue, setInputValue] = useState<string>(savedInputValue);
+  const [fetchResult, setFetchResult] = useState<Array<FetchResultInterface>>(
+    []
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [searchedValue, setSearchValue] = useState<string>('');
+  const [pageCount, setPageCount] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  useEffect(() => {
+    setIsLoading(true);
+    fetchRequest(inputValue, currentPage)
       .then((data) => {
-        this.setState({ fetchResult: data, isLoading: false });
+        setFetchResult(data.results);
+        setPageCount(Math.ceil(data.count / 10));
       })
       .catch((error) => {
         throw new Error(error);
       })
       .finally(() => {
-        this.setState({
-          isLoading: false,
-          searchedValue: this.state.inputValue.trim(),
-        });
+        setIsLoading(false);
+        setSearchValue(inputValue.trim());
       });
-  }
+  }, [currentPage]);
 
-  onSendSearchValue = () => {
-    const { inputValue } = this.state;
+  const onSendSearchValue = () => {
     localStorage.setItem('inputValue', inputValue.trim());
-    this.setState({ isLoading: true });
-
+    setIsLoading(true);
     try {
-      fetchRequest(inputValue.trim()).then((data) => {
-        this.setState({
-          isLoading: false,
-          fetchResult: data,
-          searchedValue: inputValue.trim(),
-        });
+      fetchRequest(inputValue.trim(), 1).then((data) => {
+        setFetchResult(data.results);
+        setPageCount(Math.ceil(data.count / 10));
       });
     } catch {
       throw new Error('something went wrong (:');
     } finally {
-      this.setState({
-        isLoading: false,
-        searchedValue: this.state.inputValue.trim(),
-      });
+      setIsLoading(false);
+      setSearchValue(inputValue.trim());
     }
   };
 
-  handleInputChange = (value: string) => {
-    this.setState({ inputValue: value });
-  };
+  return (
+    <div className={style.body}>
+      <header>
+        <SearchComponent
+          inputValue={inputValue}
+          handleInputChange={setInputValue}
+          onSendSearchValue={onSendSearchValue}
+        />
+      </header>
 
-  render() {
-    return (
-      <div className={style.body}>
-        <header>
-          <SearchComponent
-            inputValue={this.state.inputValue}
-            handleInputChange={this.handleInputChange}
-            onSendSearchValue={this.onSendSearchValue}
+      <main>
+        {fetchResult.length ? (
+          <Table
+            tableData={fetchResult}
+            pageCount={pageCount}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           />
-        </header>
+        ) : (
+          !isLoading && (
+            <>
+              upon request <b>{searchedValue} </b> no data
+            </>
+          )
+        )}
+        {isLoading && <Loader />}
+      </main>
 
-        <main>
-          {this.state.fetchResult.length ? (
-            <Table tableData={this.state.fetchResult} />
-          ) : (
-            !this.state.isLoading && (
-              <>
-                upon request <b>{this.state.searchedValue} </b> no data
-              </>
-            )
-          )}
-          {this.state.isLoading && <Loader />}
-        </main>
-
-        <footer>
-          <CallError />
-        </footer>
-      </div>
-    );
-  }
-}
+      <footer>
+        <CallError />
+      </footer>
+    </div>
+  );
+};
 
 export default App;
