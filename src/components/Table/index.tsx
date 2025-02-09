@@ -32,7 +32,7 @@ export const Table: React.FC<TablePropsInterface> = ({
         </thead>
 
         <tbody>
-          {tableData.map((element, index) => {
+          {tableData.map((element) => {
             return (
               <tr
                 onClick={() => {

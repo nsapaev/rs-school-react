@@ -17,8 +17,9 @@ const Pagination: React.FC<PaginationPropsInterface> = ({
   return (
     <div className={style.pagination__wrapper}>
       {mapArray.length > 1 &&
-        mapArray.map((e) => (
+        mapArray.map((e, index) => (
           <div
+            key={index}
             onClick={() => {
               localStorage.setItem('currentPage', String(e));
               setCurrentPage(e);

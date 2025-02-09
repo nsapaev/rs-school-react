@@ -54,11 +54,9 @@ export const Details: React.FC<DetailsInterface> = ({ data, isLoading }) => {
           <div>
             {data.films.map((i: string, index) => {
               return (
-                <div>
+                <div key={index}>
                   <b> films: </b>
-                  <a key={index} href={i}>
-                    link
-                  </a>
+                  <a href={i}>link</a>
                 </div>
               );
             })}

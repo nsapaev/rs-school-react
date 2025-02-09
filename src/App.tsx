@@ -76,7 +76,7 @@ const App: React.FC = () => {
         setIsLoading(false);
         setSearchValue(inputValue.trim());
       });
-  }, [currentPage]);
+  }, [currentPage, inputValue, navigate]);
 
   const onSendSearchValue = async () => {
     localStorage.setItem('inputValue', inputValue.trim());
@@ -98,6 +98,7 @@ const App: React.FC = () => {
     const target = e.target as HTMLElement;
     if (target.tagName === 'TD' || target.tagName === 'TR') {
       if (target.closest('tbody')) {
+        return;
       } else {
         searchParams.delete('details');
         setSearchParams(searchParams);
