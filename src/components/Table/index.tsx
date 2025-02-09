@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './style.css';
-
-import { Pagination } from '../Pagination';
 
 interface TablePropsInterface {
   tableData: Array<{
@@ -12,16 +10,12 @@ interface TablePropsInterface {
     hair_color: string;
     eye_color: string;
   }>;
-  pageCount: number;
-  currentPage: number;
-  setCurrentPage: (selectedPage: number) => void;
+  getDetails: (value: string) => void;
 }
 
 export const Table: React.FC<TablePropsInterface> = ({
   tableData,
-  pageCount,
-  currentPage,
-  setCurrentPage,
+  getDetails,
 }) => {
   return (
     <>
@@ -41,10 +35,10 @@ export const Table: React.FC<TablePropsInterface> = ({
           {tableData.map((element, index) => {
             return (
               <tr
-                key={element.name}
-                style={{
-                  backgroundColor: index % 2 === 0 ? 'white' : '#F6F7F8',
+                onClick={() => {
+                  getDetails(element.name);
                 }}
+                key={element.name}
               >
                 <td>{element.name}</td>
                 <td>{element.birth_year}</td>
@@ -57,11 +51,6 @@ export const Table: React.FC<TablePropsInterface> = ({
           })}
         </tbody>
       </table>
-      <Pagination
-        pageCount={pageCount}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
     </>
   );
 };

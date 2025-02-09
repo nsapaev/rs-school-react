@@ -1,12 +1,15 @@
-import { Component, createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import style from './App.module.css';
 import { SearchComponent } from './components/SearchComponent';
 import { Table } from './components/Table';
-import { fetchRequest } from './helpers/helpers';
+import { editData, fetchRequest } from './helpers/helpers';
 import { CallError } from './components/CallError';
 import { Loader } from './components/Loader';
-import { Routes, Route } from 'react-router';
+import { Details } from './components/Details';
+import { Pagination } from './components/Pagination';
+import { DetailsFetchResultInterface } from './types/types';
 
 interface FetchResultInterface {
   name: string;
@@ -17,16 +20,13 @@ interface FetchResultInterface {
   eye_color: string;
 }
 
-interface SearchComponentState {
-  inputValue: string;
-  fetchResult: Array<FetchResultInterface>;
-  isLoading: boolean;
-  searchedValue: string;
-}
-
 const savedInputValue = localStorage.getItem('inputValue') || '';
 
 const App: React.FC = () => {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const detailsParams = searchParams.get('details');
+
   const [inputValue, setInputValue] = useState<string>(savedInputValue);
   const [fetchResult, setFetchResult] = useState<Array<FetchResultInterface>>(
     []
@@ -34,12 +34,39 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchedValue, setSearchValue] = useState<string>('');
   const [pageCount, setPageCount] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(localStorage.getItem('currentPage')) || 1
+  );
+  const [detailsIsLoading, setDetailsIsLoading] = useState<boolean>(false);
+  const [detailsData, setDetailsData] = useState<
+    Array<DetailsFetchResultInterface>
+  >([]);
+
+  const getDetails = async (value: string) => {
+    setDetailsIsLoading(true);
+    console.log('value', value);
+    try {
+      const data = await fetchRequest(value, 1);
+      setDetailsData(editData(data.results));
+      navigate(
+        '/' +
+          `?page=${currentPage}` +
+          `&search=${searchedValue}&details=${data.results[0].name}`
+      );
+    } catch {
+      throw new Error(`error to request details ${value}`);
+    } finally {
+      setDetailsIsLoading(false);
+    }
+  };
+
   useEffect(() => {
+    const lSInputValue = localStorage.getItem('inputValue') || '';
     setIsLoading(true);
     fetchRequest(inputValue, currentPage)
       .then((data) => {
         setFetchResult(data.results);
+        navigate('/' + `?page=${currentPage}` + `&search=${lSInputValue}`);
         setPageCount(Math.ceil(data.count / 10));
       })
       .catch((error) => {
@@ -51,19 +78,33 @@ const App: React.FC = () => {
       });
   }, [currentPage]);
 
-  const onSendSearchValue = () => {
+  const onSendSearchValue = async () => {
     localStorage.setItem('inputValue', inputValue.trim());
+    localStorage.setItem('currentPage', String(1));
     setIsLoading(true);
     try {
-      fetchRequest(inputValue.trim(), 1).then((data) => {
-        setFetchResult(data.results);
-        setPageCount(Math.ceil(data.count / 10));
-      });
+      const data = await fetchRequest(inputValue.trim(), 1);
+      setFetchResult(data.results);
+      setPageCount(Math.ceil(data.count / 10));
     } catch {
-      throw new Error('something went wrong (:');
+      throw new Error('something went wrong fetching data (:');
     } finally {
       setIsLoading(false);
       setSearchValue(inputValue.trim());
+    }
+  };
+
+  const removeDetails = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'TD' || target.tagName === 'TR') {
+      if (target.closest('tbody')) {
+      } else {
+        searchParams.delete('details');
+        setSearchParams(searchParams);
+      }
+    } else {
+      searchParams.delete('details');
+      setSearchParams(searchParams);
     }
   };
 
@@ -77,22 +118,38 @@ const App: React.FC = () => {
         />
       </header>
 
-      <main>
-        {fetchResult.length ? (
-          <Table
-            tableData={fetchResult}
-            pageCount={pageCount}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        ) : (
-          !isLoading && (
-            <>
-              upon request <b>{searchedValue} </b> no data
-            </>
-          )
+      <main className={style.main}>
+        <div
+          onClick={(e) => {
+            removeDetails(e);
+          }}
+          className={detailsParams ? style.leftSide : undefined}
+        >
+          {fetchResult.length && !isLoading ? (
+            <div>
+              <div className={detailsParams ? style.leftSide : undefined}>
+                <Table getDetails={getDetails} tableData={fetchResult} />
+              </div>
+              <div>
+                <Pagination
+                  pageCount={pageCount}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
+            </div>
+          ) : (
+            !isLoading && (
+              <>
+                upon request <b>{searchedValue} </b> no data
+              </>
+            )
+          )}
+          {isLoading && <Loader width={detailsParams ? 500 : 900} />}
+        </div>
+        {searchParams.get('details') && (
+          <Details isLoading={detailsIsLoading} data={detailsData[0] || null} />
         )}
-        {isLoading && <Loader />}
       </main>
 
       <footer>

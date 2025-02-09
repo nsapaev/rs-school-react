@@ -16,16 +16,18 @@ const Pagination: React.FC<PaginationPropsInterface> = ({
 
   return (
     <div className={style.pagination__wrapper}>
-      {mapArray.map((e) => (
-        <div
-          onClick={() => {
-            setCurrentPage(e);
-          }}
-          className={`${style.pagination__item} ${currentPage === e ? style.pagination__item_active : null} `}
-        >
-          {e}
-        </div>
-      ))}
+      {mapArray.length > 1 &&
+        mapArray.map((e) => (
+          <div
+            onClick={() => {
+              localStorage.setItem('currentPage', String(e));
+              setCurrentPage(e);
+            }}
+            className={`${style.pagination__item} ${currentPage === e ? style.pagination__item_active : null} `}
+          >
+            {e}
+          </div>
+        ))}
     </div>
   );
 };

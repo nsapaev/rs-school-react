@@ -11,8 +11,20 @@
 header {
   height: 100px;
 }
-main {
+.main {
+  display: flex;
+  gap: 15px;
   flex: 1 1 auto;
+  overflow: hidden;
+  max-width: 1300px;
 }
 footer {
+}
+
+.leftSide {
+  flex: 0 0 50%;
+  overflow: auto;
+}
+
+.leftSide div {
 }
