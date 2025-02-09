@@ -76,7 +76,7 @@ const App: React.FC = () => {
         setIsLoading(false);
         setSearchValue(inputValue.trim());
       });
-  }, [currentPage, inputValue, navigate]);
+  }, [currentPage]);
 
   const onSendSearchValue = async () => {
     localStorage.setItem('inputValue', inputValue.trim());
