@@ -39,3 +39,12 @@ tr {
   display: flex;
   gap: 50px;
 }
+
+tbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+tbody tr:hover {
+  background-color: #ffde31;
+  cursor: pointer;
+}

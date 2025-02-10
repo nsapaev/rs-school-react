@@ -1,114 +1,163 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import style from './App.module.css';
 import { SearchComponent } from './components/SearchComponent';
 import { Table } from './components/Table';
-import { fetchRequest } from './helpers/helpers';
+import { editData, fetchRequest } from './helpers/helpers';
 import { CallError } from './components/CallError';
 import { Loader } from './components/Loader';
+import { Details } from './components/Details';
+import { Pagination } from './components/Pagination';
+import { DetailsFetchResultInterface } from './types/types';
 
-interface SearchComponentState {
-  inputValue: string;
-  fetchResult: Array<{
-    name: string;
-    birth_year: string;
-    gender: string;
-    height: string;
-    hair_color: string;
-    eye_color: string;
-  }>;
-  isLoading: boolean;
-  searchedValue: string;
+interface FetchResultInterface {
+  name: string;
+  birth_year: string;
+  gender: string;
+  height: string;
+  hair_color: string;
+  eye_color: string;
 }
 
-class App extends Component<unknown, SearchComponentState> {
-  constructor(props: object) {
-    super(props);
-    const savedInputValue = localStorage.getItem('inputValue');
-    this.state = {
-      inputValue: savedInputValue ?? '',
-      fetchResult: [],
-      isLoading: false,
-      searchedValue: '',
-    };
-  }
+const savedInputValue = localStorage.getItem('inputValue') || '';
 
-  componentDidMount() {
-    const lSValue = localStorage.getItem('inputValue');
-    this.setState({ isLoading: true });
+const App: React.FC = () => {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const detailsParams = searchParams.get('details');
 
-    fetchRequest(lSValue ?? '')
+  const [inputValue, setInputValue] = useState<string>(savedInputValue);
+  const [fetchResult, setFetchResult] = useState<Array<FetchResultInterface>>(
+    []
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [searchedValue, setSearchValue] = useState<string>('');
+  const [pageCount, setPageCount] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(localStorage.getItem('currentPage')) || 1
+  );
+  const [detailsIsLoading, setDetailsIsLoading] = useState<boolean>(false);
+  const [detailsData, setDetailsData] = useState<
+    Array<DetailsFetchResultInterface>
+  >([]);
+
+  const getDetails = async (value: string) => {
+    setDetailsIsLoading(true);
+    console.log('value', value);
+    try {
+      const data = await fetchRequest(value, 1);
+      setDetailsData(editData(data.results));
+      navigate(
+        '/' +
+          `?page=${currentPage}` +
+          `&search=${searchedValue}&details=${data.results[0].name}`
+      );
+    } catch {
+      throw new Error(`error to request details ${value}`);
+    } finally {
+      setDetailsIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const lSInputValue = localStorage.getItem('inputValue') || '';
+    setIsLoading(true);
+    fetchRequest(inputValue, currentPage)
       .then((data) => {
-        this.setState({ fetchResult: data, isLoading: false });
+        setFetchResult(data.results);
+        navigate('/' + `?page=${currentPage}` + `&search=${lSInputValue}`);
+        setPageCount(Math.ceil(data.count / 10));
       })
       .catch((error) => {
         throw new Error(error);
       })
       .finally(() => {
-        this.setState({
-          isLoading: false,
-          searchedValue: this.state.inputValue.trim(),
-        });
+        setIsLoading(false);
+        setSearchValue(inputValue.trim());
       });
-  }
+  }, [currentPage]);
 
-  onSendSearchValue = () => {
-    const { inputValue } = this.state;
+  const onSendSearchValue = async () => {
     localStorage.setItem('inputValue', inputValue.trim());
-    this.setState({ isLoading: true });
-
+    localStorage.setItem('currentPage', String(1));
+    setIsLoading(true);
     try {
-      fetchRequest(inputValue.trim()).then((data) => {
-        this.setState({
-          isLoading: false,
-          fetchResult: data,
-          searchedValue: inputValue.trim(),
-        });
-      });
+      const data = await fetchRequest(inputValue.trim(), 1);
+      setFetchResult(data.results);
+      setPageCount(Math.ceil(data.count / 10));
     } catch {
-      throw new Error('something went wrong (:');
+      throw new Error('something went wrong fetching data (:');
     } finally {
-      this.setState({
-        isLoading: false,
-        searchedValue: this.state.inputValue.trim(),
-      });
+      setIsLoading(false);
+      setSearchValue(inputValue.trim());
     }
   };
 
-  handleInputChange = (value: string) => {
-    this.setState({ inputValue: value });
+  const removeDetails = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'TD' || target.tagName === 'TR') {
+      if (target.closest('tbody')) {
+        return;
+      } else {
+        searchParams.delete('details');
+        setSearchParams(searchParams);
+      }
+    } else {
+      searchParams.delete('details');
+      setSearchParams(searchParams);
+    }
   };
 
-  render() {
-    return (
-      <div className={style.body}>
-        <header>
-          <SearchComponent
-            inputValue={this.state.inputValue}
-            handleInputChange={this.handleInputChange}
-            onSendSearchValue={this.onSendSearchValue}
-          />
-        </header>
+  return (
+    <div className={style.body}>
+      <header>
+        <SearchComponent
+          inputValue={inputValue}
+          handleInputChange={setInputValue}
+          onSendSearchValue={onSendSearchValue}
+        />
+      </header>
 
-        <main>
-          {this.state.fetchResult.length ? (
-            <Table tableData={this.state.fetchResult} />
+      <main className={style.main}>
+        <div
+          onClick={(e) => {
+            removeDetails(e);
+          }}
+          className={detailsParams ? style.leftSide : undefined}
+        >
+          {fetchResult.length && !isLoading ? (
+            <div>
+              <div className={detailsParams ? style.leftSide : undefined}>
+                <Table getDetails={getDetails} tableData={fetchResult} />
+              </div>
+              <div>
+                <Pagination
+                  pageCount={pageCount}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
+            </div>
           ) : (
-            !this.state.isLoading && (
+            !isLoading && (
               <>
-                upon request <b>{this.state.searchedValue} </b> no data
+                upon request <b>{searchedValue} </b> no data
               </>
             )
           )}
-          {this.state.isLoading && <Loader />}
-        </main>
+          {isLoading && <Loader width={detailsParams ? 500 : 900} />}
+        </div>
+        {searchParams.get('details') && (
+          <Details isLoading={detailsIsLoading} data={detailsData[0] || null} />
+        )}
+      </main>
 
-        <footer>
-          <CallError />
-        </footer>
-      </div>
-    );
-  }
-}
+      <footer>
+        <CallError />
+      </footer>
+    </div>
+  );
+};
 
 export default App;

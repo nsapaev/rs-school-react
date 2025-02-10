@@ -1,0 +1,27 @@
+.details__open {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+  background-color: #f6f7f8;
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+  font-size: 20px;
+  position: relative;
+}
+.close {
+  cursor: pointer;
+  position: absolute;
+  left: 80%;
+  top: 20px;
+  border: none;
+  background-color: #ffde31;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
