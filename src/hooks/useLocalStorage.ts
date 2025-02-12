@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { editData } from '../helpers/helpers';
 import { DataListInterface } from '../types/types';
 
 const BASE_URL = 'https://swapi.dev/api/people/';

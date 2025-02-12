@@ -28,8 +28,8 @@ export const Table: React.FC<TablePropsInterface> = ({ tableData }) => {
           <tbody>
             {tableData.map((element) => {
               return (
-                <Link to={'details/' + element.name}>
-                  <tr key={element.name}>
+                <Link key={element.name} to={'details/' + element.name}>
+                  <tr>
                     <td>{element.name}</td>
                     <td>{element.birth_year}</td>
                     <td>{element.gender}</td>
