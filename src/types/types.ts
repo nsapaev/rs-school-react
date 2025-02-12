@@ -31,3 +31,17 @@ export interface DetailsFetchResultInterface {
   created: string;
   edited: string;
 }
+
+export interface DataListInterface {
+  name: string;
+  birth_year: string;
+  gender: string;
+  height: string;
+  hair_color: string;
+  eye_color: string;
+}
+
+export interface FetchDataInterface {
+  count: number;
+  result: Array<DataListInterface>;
+}
