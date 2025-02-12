@@ -25,8 +25,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <ErrorBoundary fallback={<FallBack />}>
-      <RouterProvider router={router} />
-    </ErrorBoundary>
+    <RouterProvider router={router} />
   </StrictMode>
 );
