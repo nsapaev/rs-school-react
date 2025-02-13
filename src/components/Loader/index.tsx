@@ -8,6 +8,8 @@ interface LoaderInterface {
 export const Loader: React.FC<LoaderInterface> = ({ width = 900 }) => {
   return (
     <div
+      data-testid="loader"
+      className="Loader"
       style={{
         width: width + 'px',
         height: '500px',

@@ -33,6 +33,7 @@ export const Details: React.FC = () => {
 
   const handleCloseDetails = () => {
     navigate({ pathname: '/', search: searchParams.toString() });
+    console.log(window.location.href);
   };
 
   return (
@@ -73,7 +74,11 @@ export const Details: React.FC = () => {
           <div>
             <b>edited: </b> {data[0].edited}
           </div>
-          <button className={style.close} onClick={handleCloseDetails}>
+          <button
+            data-testid="close-button"
+            className={style.close}
+            onClick={handleCloseDetails}
+          >
             x
           </button>
         </div>

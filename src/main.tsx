@@ -2,8 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { App } from './App.tsx';
-import { ErrorBoundary } from './components/ErrorBoundary/index.tsx';
-import { FallBack } from './components/FallBack/index.tsx';
+
 import { NotFoundPage } from './pages/NotFoundPage/index.tsx';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
