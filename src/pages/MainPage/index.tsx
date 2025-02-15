@@ -35,7 +35,7 @@ const MainPage: React.FC = () => {
   }, [currentPage]);
 
   return (
-    <div className={style.body}>
+    <div className={style.body} data-testid="main-page">
       <header>
         <SearchComponent
           inputValue={inputValue}
