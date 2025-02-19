@@ -17,7 +17,6 @@ export const Details: React.FC = () => {
     fetchRequest(params.detailId || '', 1)
       .then((data) => {
         setData(data.results);
-        console.log('data', data);
       })
       .catch((err) => {
         console.log(err);
@@ -31,6 +30,7 @@ export const Details: React.FC = () => {
     return <Loader width={200} />;
   }
 
+  console.log('searchParams', searchParams);
   const handleCloseDetails = () => {
     navigate({ pathname: '/', search: searchParams.toString() });
     console.log(window.location.href);

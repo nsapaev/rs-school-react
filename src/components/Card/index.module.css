@@ -1,0 +1,30 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  background-color: lightgray;
+  font-size: 20px;
+  margin-bottom: 10px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.card:hover {
+  background-color: #ffde31;
+  transition: all 0.3s ease;
+}
+
+.name {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.mass,
+.gender {
+  text-align: center;
+}

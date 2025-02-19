@@ -1,17 +1,17 @@
 import React from 'react';
 import style from './style.module.css';
-
+import { setCurrentPage } from '../../features/people/people-slice';
+import { useAppDispatch } from '../../app/hooks';
 interface PaginationPropsInterface {
   pageCount: number;
   currentPage: number;
-  setCurrentPage: (selectedPage: number) => void;
 }
 
 const Pagination: React.FC<PaginationPropsInterface> = ({
   pageCount,
   currentPage,
-  setCurrentPage,
 }) => {
+  const dispatch = useAppDispatch();
   const mapArray = Array.from({ length: pageCount }, (_, i) => i + 1);
 
   return (
@@ -21,8 +21,7 @@ const Pagination: React.FC<PaginationPropsInterface> = ({
           <div
             key={index}
             onClick={() => {
-              localStorage.setItem('currentPage', String(e));
-              setCurrentPage(e);
+              dispatch(setCurrentPage(e));
             }}
             className={`${style.pagination__item} ${currentPage === e ? style.pagination__item_active : null} `}
           >

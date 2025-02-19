@@ -1,28 +1,40 @@
+import React, { useState } from 'react';
+
 import style from './style.module.css';
+import { useAppDispatch } from '../../app/hooks';
+import { changeSearchValue } from '../../features/people/people-slice';
+import { setCurrentPage } from '../../features/people/people-slice';
 
-interface SearchComponentPropsInterface {
-  inputValue: string;
-  handleInputChange: (value: string) => void;
-  onSendSearchValue: () => void;
-}
+export const SearchComponent: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const [value, setValue] = useState<string>(
+    localStorage.getItem('search') || ''
+  );
 
-export const SearchComponent: React.FC<SearchComponentPropsInterface> = ({
-  handleInputChange,
-  inputValue,
-  onSendSearchValue,
-}) => {
+  const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+  const onSendSearchValue = (event: React.FormEvent) => {
+    event.preventDefault();
+    localStorage.setItem('search', value.trim());
+    dispatch(changeSearchValue(value.trim()));
+    dispatch(setCurrentPage(1));
+  };
+
   return (
-    <form style={{ marginBottom: '100px' }}>
+    <form style={{ marginBottom: '100px' }} onSubmit={onSendSearchValue}>
       <div className={style.container}>
         <input
           placeholder="Search by name"
           type="text"
-          value={inputValue}
-          onChange={(e) => {
-            handleInputChange(e.target.value);
-          }}
+          value={value}
+          onChange={onChangeValue}
         />
-        <button className={style.customButton} onClick={onSendSearchValue}>
+        <button
+          type="submit"
+          className={style.customButton}
+          onClick={onSendSearchValue}
+        >
           search
         </button>
       </div>
