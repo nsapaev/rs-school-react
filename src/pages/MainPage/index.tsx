@@ -53,7 +53,7 @@ const MainPage: React.FC = () => {
           )}
         </div>
       ) : (
-        <Loader />
+        <Loader width={400} />
       )}
       <Outlet />
     </main>

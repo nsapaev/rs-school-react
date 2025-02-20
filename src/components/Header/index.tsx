@@ -10,6 +10,7 @@ const Header: React.FC = () => {
 
   const clickHandler = () => {
     if (themeContext) {
+      localStorage.setItem('isDarkMode', String(!themeContext.isDarkMode));
       themeContext.setIsDarkMode(!themeContext.isDarkMode);
     }
   };

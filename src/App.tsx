@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import style from './App.module.css';
 
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -10,7 +9,11 @@ import { Header } from './components/Header';
 import { ThemeContext } from './contexts/theme-context';
 
 const App: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(
+    localStorage.getItem('isDarkMode')
+      ? JSON.parse(String(localStorage.getItem('isDarkMode')))
+      : false
+  );
 
   return (
     <ErrorBoundary fallback={<FallBack />}>
