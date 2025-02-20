@@ -22,7 +22,7 @@ export const SearchComponent: React.FC = () => {
   };
 
   return (
-    <form style={{ marginBottom: '100px' }} onSubmit={onSendSearchValue}>
+    <form onSubmit={onSendSearchValue}>
       <div className={style.container}>
         <input
           placeholder="Search by name"

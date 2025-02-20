@@ -30,10 +30,8 @@ export const Details: React.FC = () => {
     return <Loader width={200} />;
   }
 
-  console.log('searchParams', searchParams);
   const handleCloseDetails = () => {
     navigate({ pathname: '/', search: searchParams.toString() });
-    console.log(window.location.href);
   };
 
   return (

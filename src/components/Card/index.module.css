@@ -4,8 +4,8 @@
   gap: 7px;
   align-items: center;
   justify-content: center;
-  color: black;
-  background-color: lightgray;
+  color: var(--text-color);
+  background-color: var(--card-bg-color);
   font-size: 20px;
   margin-bottom: 10px;
   width: 300px;
@@ -14,7 +14,7 @@
   text-decoration: none;
 }
 .card:hover {
-  background-color: #ffde31;
+  background-color: var(--hover-color);
   transition: all 0.3s ease;
 }
 

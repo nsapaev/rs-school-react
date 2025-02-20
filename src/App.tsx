@@ -1,15 +1,29 @@
+import { useState } from 'react';
+
+import style from './App.module.css';
+
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { FallBack } from './components/FallBack';
 import MainPage from './pages/MainPage';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
+import { ThemeContext } from './contexts/theme-context';
 
 const App: React.FC = () => {
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+
   return (
     <ErrorBoundary fallback={<FallBack />}>
-      <Header />
-      <MainPage />
-      <Footer />
+      <ThemeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
+        <div
+          data-theme={isDarkMode ? 'dark-mode' : 'light-mode'}
+          className={style.wrapper}
+        >
+          <Header />
+          <MainPage />
+          <Footer />
+        </div>
+      </ThemeContext.Provider>
     </ErrorBoundary>
   );
 };

@@ -1,12 +1,7 @@
 import React from 'react';
-import { CallError } from '../CallError';
 
 const Footer: React.FC = () => {
-  return (
-    <footer>
-      <CallError />
-    </footer>
-  );
+  return <footer></footer>;
 };
 
 export { Footer };

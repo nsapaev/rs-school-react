@@ -5,8 +5,6 @@ import style from './index.module.css';
 const Card: React.FC<PeopleInterface> = ({ gender, mass, name }) => {
   const location = useLocation();
 
-  console.log('location', location);
-
   return (
     <Link to={`/details/${name}${location.search}`} className={style.card}>
       <div className={style.name}>{name}</div>
