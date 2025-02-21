@@ -48,22 +48,22 @@ export const Details: React.FC = () => {
             <b> mass: </b> {data[0].mass}
           </div>
           <div>
-            <b> hairColor: </b> {data[0].hairColor}
+            <b> hairColor: </b> {data[0].hair_color}
           </div>
           <div>
-            <b> skinColor: </b> {data[0].skinColor}
+            <b> skinColor: </b> {data[0].skin_color}
           </div>
           <div>
-            <b> eyeColor: </b> {data[0].eyeColor}
+            <b> eyeColor: </b> {data[0].eye_color}
           </div>
           <div>
-            <b> birthYear: </b> {data[0].birthYear}
+            <b> birthYear: </b> {data[0].birth_year}
           </div>
           <div>
             <b> gender: </b> {data[0].gender}
           </div>
           <div>
-            <b> home World: </b> <a href={data[0].homeWorld}>link</a>
+            <b> home World: </b> <a href={data[0].home_world}>link</a>
           </div>
 
           <div>

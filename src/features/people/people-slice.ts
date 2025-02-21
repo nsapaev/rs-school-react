@@ -3,14 +3,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface SearchSliceInterface {
   value: string;
   currentPage: number;
+  selectedCards: string[];
 }
 
 const initialState: SearchSliceInterface = {
   value: '',
   currentPage: 1,
+  selectedCards: [],
 };
 
-const peopleSlice = createSlice({
+const people = createSlice({
   name: 'search-slice',
   initialState: initialState,
   reducers: {
@@ -20,8 +22,24 @@ const peopleSlice = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
+    selectCard(state, action: PayloadAction<string>) {
+      const index = state.selectedCards.indexOf(action.payload);
+      if (index === -1) {
+        state.selectedCards.push(action.payload);
+      } else {
+        state.selectedCards.splice(index, 1);
+      }
+    },
+    unselectAllCards(state) {
+      state.selectedCards = [];
+    },
   },
 });
 
-export const { changeSearchValue, setCurrentPage } = peopleSlice.actions;
-export default peopleSlice.reducer;
+export const {
+  changeSearchValue,
+  setCurrentPage,
+  selectCard,
+  unselectAllCards,
+} = people.actions;
+export default people.reducer;

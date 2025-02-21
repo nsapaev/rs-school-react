@@ -6,7 +6,7 @@ import { peopleApiSlice } from '../api/people-api-slice';
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    searchPeople: peopleSlice,
+    people: peopleSlice,
     [peopleApiSlice.reducerPath]: peopleApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {

@@ -7,6 +7,7 @@ import MainPage from './pages/MainPage';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { ThemeContext } from './contexts/theme-context';
+import { Flyout } from './components/Flyout';
 
 const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         >
           <Header />
           <MainPage />
+          <Flyout />
           <Footer />
         </div>
       </ThemeContext.Provider>

@@ -14,8 +14,8 @@ const MainPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const paramsDetails = useParams().detailId;
-  const searchValue = useAppSelector((store) => store.searchPeople.value);
-  const currentPage = useAppSelector((store) => store.searchPeople.currentPage);
+  const searchValue = useAppSelector((store) => store.people.value);
+  const currentPage = useAppSelector((store) => store.people.currentPage);
 
   const { data, isFetching, isError, error } = useFetchPeopleQuery({
     page: currentPage,
