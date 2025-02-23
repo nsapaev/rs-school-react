@@ -1,7 +1,4 @@
-import { Component } from 'react';
-
-export class FallBack extends Component {
-  render() {
-    return <>oops something went wrong {'(:'}</>;
-  }
-}
+import React from 'react';
+export const FallBack: React.FC = () => {
+  return <>oops something went wrong {'(:'}</>;
+};

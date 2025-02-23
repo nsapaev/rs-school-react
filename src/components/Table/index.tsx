@@ -1,21 +1,18 @@
-import { Component } from 'react';
-import './styles.css';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import './style.css';
+import { DataListInterface } from '../../types/types';
 
 interface TablePropsInterface {
-  tableData: Array<{
-    name: string;
-    birth_year: string;
-    gender: string;
-    height: string;
-    hair_color: string;
-    eye_color: string;
-  }>;
+  tableData: Array<DataListInterface>;
+  // getDetails: (value: string) => void;
 }
 
-export class Table extends Component<TablePropsInterface, unknown> {
-  render() {
-    return (
-      <>
+export const Table: React.FC<TablePropsInterface> = ({ tableData }) => {
+  return (
+    <>
+      {tableData.length ? (
         <table>
           <thead>
             <tr>
@@ -29,26 +26,25 @@ export class Table extends Component<TablePropsInterface, unknown> {
           </thead>
 
           <tbody>
-            {this.props.tableData.map((element, index) => {
+            {tableData.map((element) => {
               return (
-                <tr
-                  key={element.name}
-                  style={{
-                    backgroundColor: index % 2 === 0 ? 'white' : '#F6F7F8',
-                  }}
-                >
-                  <td>{element.name}</td>
-                  <td>{element.birth_year}</td>
-                  <td>{element.gender}</td>
-                  <td>{element.height}</td>
-                  <td>{element.hair_color}</td>
-                  <td>{element.eye_color}</td>
-                </tr>
+                <Link key={element.name} to={'details/' + element.name}>
+                  <tr role="row">
+                    <td>{element.name}</td>
+                    <td>{element.birth_year}</td>
+                    <td>{element.gender}</td>
+                    <td>{element.height}</td>
+                    <td>{element.hair_color}</td>
+                    <td>{element.eye_color}</td>
+                  </tr>
+                </Link>
               );
             })}
           </tbody>
         </table>
-      </>
-    );
-  }
-}
+      ) : (
+        <div>no data</div>
+      )}
+    </>
+  );
+};
