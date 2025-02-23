@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Card } from '../Card';
-
 import './style.css';
-import { PeopleInterface } from '../../api/people-api-slice';
 
+import { Card } from '../Card';
+import { DetailsFetchResultInterface } from '../../types/types';
 interface TablePropsInterface {
-  tableData: PeopleInterface[];
+  tableData: DetailsFetchResultInterface[];
 }
 
 export const Cards: React.FC<TablePropsInterface> = ({ tableData }) => {
@@ -14,14 +13,7 @@ export const Cards: React.FC<TablePropsInterface> = ({ tableData }) => {
     <div className="cards-wrapper">
       {tableData?.length ? (
         tableData.map((people) => {
-          return (
-            <Card
-              gender={people.gender}
-              mass={people.mass}
-              name={people.name}
-              key={people.name}
-            />
-          );
+          return <Card people={people} key={people.name} />;
         })
       ) : (
         <div>no data</div>

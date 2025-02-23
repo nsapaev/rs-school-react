@@ -26,9 +26,6 @@ export interface DetailsFetchResultInterface {
   eye_color: string;
   birth_year: string;
   gender: string;
-  home_world: string;
-  created: string;
-  edited: string;
 }
 
 export interface DataListInterface {

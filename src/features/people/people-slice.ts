@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { DetailsFetchResultInterface } from '../../types/types';
 
-interface SearchSliceInterface {
+export interface SearchSliceInterface {
   value: string;
   currentPage: number;
-  selectedCards: string[];
+  selectedCards: DetailsFetchResultInterface[];
 }
 
 const initialState: SearchSliceInterface = {
@@ -13,7 +14,7 @@ const initialState: SearchSliceInterface = {
 };
 
 const people = createSlice({
-  name: 'search-slice',
+  name: 'people',
   initialState: initialState,
   reducers: {
     changeSearchValue(state, action: PayloadAction<string>) {
@@ -22,12 +23,15 @@ const people = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-    selectCard(state, action: PayloadAction<string>) {
-      const index = state.selectedCards.indexOf(action.payload);
-      if (index === -1) {
+    selectCard(state, action: PayloadAction<DetailsFetchResultInterface>) {
+      const existingIndex = state.selectedCards.findIndex(
+        (element) => element.name === action.payload.name
+      );
+      console.log('peopleFind', existingIndex);
+      if (existingIndex === -1) {
         state.selectedCards.push(action.payload);
       } else {
-        state.selectedCards.splice(index, 1);
+        state.selectedCards.splice(existingIndex, 1);
       }
     },
     unselectAllCards(state) {

@@ -33,7 +33,13 @@ const MainPage: React.FC = () => {
   }, [dispatch]);
 
   if (isError) {
-    return <>{error}</>;
+    return (
+      <>
+        {error && (
+          <p>{typeof error === 'string' ? error : JSON.stringify(error)}</p>
+        )}
+      </>
+    );
   }
 
   return (

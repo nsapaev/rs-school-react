@@ -1,14 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-export interface PeopleInterface {
-  name: string;
-  mass: string;
-  gender: string;
-}
+import { DetailsFetchResultInterface } from '../types/types';
 
 export interface ResponsePeoplesInterface {
   count: number;
-  results: PeopleInterface[];
+  results: DetailsFetchResultInterface[];
 }
 
 interface RequestPeoplesInterface {

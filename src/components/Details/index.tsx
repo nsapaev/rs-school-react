@@ -1,77 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import style from './style.module.css';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 
+import style from './style.module.css';
 import { Loader } from '../Loader';
-import { DetailsFetchResultInterface } from '../../types/types';
-import { fetchRequest } from '../../helpers/helpers';
+import { useFetchPeopleQuery } from '../../api/people-api-slice';
+
 export const Details: React.FC = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [data, setData] = useState<Array<DetailsFetchResultInterface>>();
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    setLoading(true);
-    fetchRequest(params.detailId || '', 1)
-      .then((data) => {
-        setData(data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [params.detailId]);
-
-  if (loading) {
-    return <Loader width={200} />;
-  }
+  const { data, isFetching, isError, error } = useFetchPeopleQuery({
+    page: 1,
+    search: String(params.detailId),
+  });
 
   const handleCloseDetails = () => {
     navigate({ pathname: '/', search: searchParams.toString() });
   };
 
+  if (isError) {
+    return <>{error}</>;
+  }
+
+  if (isFetching) {
+    return <Loader width={200} />;
+  }
+
   return (
     <>
-      {data && (
+      {data?.results && (
         <div className={style.details__open}>
           <div>
-            <b> name: </b> {data[0].name}
+            <b> name: </b> {data.results[0].name}
           </div>
           <div>
-            <b> height: </b> {data[0].height}
+            <b> height: </b> {data.results[0].height}
           </div>
           <div>
-            <b> mass: </b> {data[0].mass}
+            <b> mass: </b> {data.results[0].mass}
           </div>
           <div>
-            <b> hairColor: </b> {data[0].hair_color}
+            <b> hairColor: </b> {data.results[0].hair_color}
           </div>
           <div>
-            <b> skinColor: </b> {data[0].skin_color}
+            <b> skinColor: </b> {data.results[0].skin_color}
           </div>
           <div>
-            <b> eyeColor: </b> {data[0].eye_color}
+            <b> eyeColor: </b> {data.results[0].eye_color}
           </div>
           <div>
-            <b> birthYear: </b> {data[0].birth_year}
+            <b> birthYear: </b> {data.results[0].birth_year}
           </div>
           <div>
-            <b> gender: </b> {data[0].gender}
-          </div>
-          <div>
-            <b> home World: </b> <a href={data[0].home_world}>link</a>
+            <b> gender: </b> {data.results[0].gender}
           </div>
 
-          <div>
-            <b> created:</b> {data[0].created}
-          </div>
-          <div>
-            <b>edited: </b> {data[0].edited}
-          </div>
           <button
             data-testid="close-button"
             className={style.close}

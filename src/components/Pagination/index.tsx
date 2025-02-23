@@ -15,7 +15,7 @@ const Pagination: React.FC<PaginationPropsInterface> = ({
   const mapArray = Array.from({ length: pageCount }, (_, i) => i + 1);
 
   return (
-    <div className={style.pagination__wrapper}>
+    <div data-testid="pagination" className={style.pagination__wrapper}>
       {mapArray.length > 1 &&
         mapArray.map((e, index) => (
           <div

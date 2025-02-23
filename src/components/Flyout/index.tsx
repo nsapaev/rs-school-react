@@ -1,6 +1,7 @@
 import style from './style.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { unselectAllCards } from '../../features/people/people-slice';
+import { DownloadFile } from '../DownloadFile';
 
 const Flyout: React.FC = () => {
   const selectedCardsCount = useAppSelector(
@@ -24,7 +25,7 @@ const Flyout: React.FC = () => {
           <button className={style.flyoutButton} onClick={unselectHandler}>
             Unselect all
           </button>
-          <button className={style.flyoutButton}>Download</button>
+          <DownloadFile fileName={`${selectedCardsCount}_peoples.csv`} />
         </div>
       </div>
     </div>
