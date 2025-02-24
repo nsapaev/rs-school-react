@@ -5,11 +5,12 @@ import { ThemeContext } from '../../../contexts/theme-context';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import peopleReducer from '../../../features/people/people-slice';
+import { ThemeContextInterface } from '../../../contexts/theme-context';
 import '@testing-library/jest-dom';
 
 const renderWithProviders = (
   component: React.ReactElement,
-  themeValue: boolean
+  themeValue: ThemeContextInterface | undefined
 ) => {
   const store = configureStore({ reducer: { people: peopleReducer } });
   return render(

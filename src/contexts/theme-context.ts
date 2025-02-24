@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-interface ThemeContextInterface {
+export interface ThemeContextInterface {
   isDarkMode: boolean;
   setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
