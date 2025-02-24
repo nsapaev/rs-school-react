@@ -1,18 +1,7 @@
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
 import { DownloadFile } from '..';
-import { peopleApiSlice } from '../../../api/people-api-slice';
-
-const store = configureStore({
-  reducer: {
-    [peopleApiSlice.reducerPath]: peopleApiSlice.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(peopleApiSlice.middleware),
-});
 
 vi.mock('../../../app/hooks', () => ({
   useAppSelector: () => [
@@ -36,12 +25,9 @@ describe('Download File', () => {
   afterAll(() => {
     vi.restoreAllMocks();
   });
+
   it('should display download Button', async () => {
-    render(
-      <Provider store={store}>
-        <DownloadFile fileName="download.csv" />
-      </Provider>
-    );
+    render(<DownloadFile fileName="download.csv" />);
 
     expect(
       await screen.findByRole('button', { name: /Download/i })
