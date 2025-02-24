@@ -1,5 +1,5 @@
 import React from 'react';
-import GearSvg from '../../assets/Gear@1x-0.2s-200px-200px.svg';
+import Tube from '../../assets/tube-spinner.svg';
 
 interface LoaderInterface {
   width?: number;
@@ -19,7 +19,7 @@ export const Loader: React.FC<LoaderInterface> = ({ width = 900 }) => {
         justifyContent: 'center',
       }}
     >
-      <img src={GearSvg} alt="" />
+      <img src={Tube} alt="" />
     </div>
   );
 };

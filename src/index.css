@@ -1,0 +1,87 @@
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+[data-theme='dark-mode'] {
+  --card-bg-color: #9db2bf;
+  --bg-color: #27374d;
+  --text-color: #27374d;
+  --border-color: #526d82;
+  --button-color: #f08a5d;
+  --hover-color: #dde6ed;
+}
+
+[data-theme='light-mode'] {
+  --card-bg-color: #b1c29e;
+  --bg-color: #fce7c8;
+  --text-color: #27445d;
+  --border-color: #fada7a;
+  --button-color: #f0a04b;
+  --hover-color: #fada7a;
+}
