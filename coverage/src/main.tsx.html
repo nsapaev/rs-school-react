@@ -25,7 +25,7 @@
           <div class="fl pad1y space-right2">
             <span class="strong">0% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">0/25</span>
+            <span class="fraction">0/29</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -43,7 +43,7 @@
           <div class="fl pad1y space-right2">
             <span class="strong">0% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">0/25</span>
+            <span class="fraction">0/29</span>
           </div>
         </div>
         <p class="quiet">
@@ -88,7 +88,11 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -97,21 +101,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -126,6 +134,8 @@
 &nbsp;
 <span class="cstat-no" title="statement not covered" >import { createBrowserRouter, RouterProvider } from 'react-router-dom';</span>
 <span class="cstat-no" title="statement not covered" >import { Details } from './components/Details/index.tsx';</span>
+<span class="cstat-no" title="statement not covered" >import { Provider } from 'react-redux';</span>
+<span class="cstat-no" title="statement not covered" >import { store } from './app/store.ts';</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >const router = createBrowserRouter([</span>
 <span class="cstat-no" title="statement not covered" >  {</span>
@@ -143,7 +153,9 @@
 &nbsp;
 <span class="cstat-no" title="statement not covered" >createRoot(document.getElementById('root') as HTMLElement).render(</span>
 <span class="cstat-no" title="statement not covered" >  &lt;StrictMode&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;RouterProvider router={router} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;Provider store={store}&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;RouterProvider router={router} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/Provider&gt;</span>
 <span class="cstat-no" title="statement not covered" >  &lt;/StrictMode&gt;</span>
 <span class="cstat-no" title="statement not covered" >);</span>
 &nbsp;</pre></td></tr></table></pre>
@@ -160,7 +172,7 @@
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2025-02-15T14:31:00.019Z
+      at 2025-02-24T16:39:29.403Z
     </div>
     <script src="../prettify.js"></script>
     <script>

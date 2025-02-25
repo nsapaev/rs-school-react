@@ -1,5 +1,4 @@
 import { Component, ErrorInfo } from 'react';
-
 interface ErrorBoundaryStateInterface {
   hasError: boolean;
 }
@@ -26,9 +25,34 @@ export class ErrorBoundary extends Component<
     console.log(error, info);
   }
 
+  clickHandler = () => {
+    this.setState({ hasError: false });
+  };
+
   render() {
     if (this.state.hasError) {
-      return <>{this.props.fallback}</>;
+      return (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            gap: '10px',
+          }}
+        >
+          {this.props.fallback}
+          <button
+            style={{
+              backgroundColor: '#f08a5d',
+            }}
+            onClick={this.clickHandler}
+          >
+            back
+          </button>
+        </div>
+      );
     }
     return this.props.children;
   }

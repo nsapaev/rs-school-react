@@ -1,72 +1,68 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, Outlet, useParams } from 'react-router-dom';
 
 import style from './style.module.css';
-import { SearchComponent } from '../../components/SearchComponent';
-import { Table } from '../../components/Table';
-import { CallError } from '../../components/CallError';
+
+import { Cards } from '../../components/Cards';
 import { Loader } from '../../components/Loader';
 import { Pagination } from '../../components/Pagination';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useFetchPeopleQuery } from '../../api/people-api-slice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { changeSearchValue } from '../../features/people/people-slice';
 
 const MainPage: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const paramsDetails = useParams().detailId;
-  const [
-    data,
-    setFetchInputValue,
-    currentPage,
-    setCurrentPage,
-    pageCount,
-    loading,
-  ] = useLocalStorage();
+  const searchValue = useAppSelector((store) => store.people.value);
+  const currentPage = useAppSelector((store) => store.people.currentPage);
 
-  const [inputValue, setInputValue] = useState<string>(
-    localStorage.getItem('inputValue') || ''
-  );
-
-  const onSendSearchValue = () => {
-    setFetchInputValue(inputValue);
-    setCurrentPage(1);
-  };
+  const { data, isFetching, isError, error } = useFetchPeopleQuery({
+    page: currentPage,
+    search: searchValue,
+  });
 
   useEffect(() => {
-    navigate(`?search=${inputValue.trim()}&page=${currentPage}`);
-  }, [currentPage]);
+    navigate(
+      `?search=${localStorage.getItem('search') || searchValue}&page=${currentPage}`
+    );
+  }, [searchValue, currentPage, navigate]);
+
+  useEffect(() => {
+    dispatch(changeSearchValue(localStorage.getItem('search') || ''));
+  }, [dispatch]);
+
+  if (isError) {
+    return (
+      <>
+        {error && (
+          <p>{typeof error === 'string' ? error : JSON.stringify(error)}</p>
+        )}
+      </>
+    );
+  }
 
   return (
-    <div className={style.body} data-testid="main-page">
-      <header>
-        <SearchComponent
-          inputValue={inputValue}
-          handleInputChange={setInputValue}
-          onSendSearchValue={onSendSearchValue}
-        />
-      </header>
-
-      <main className={style.main}>
-        {!loading ? (
-          <div className={paramsDetails ? style.table_short : style.table_full}>
-            <Table tableData={data} />
-            <Pagination
-              pageCount={pageCount}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </div>
-        ) : (
-          <Loader />
-        )}
-
-        <div className={style.details}>
-          <Outlet />
+    <main className={style.main}>
+      {!isFetching ? (
+        <div className={paramsDetails ? style.table_short : style.table_full}>
+          {data?.results.length ? (
+            <>
+              <Cards tableData={data.results} />
+              <Pagination
+                pageCount={Math.ceil(data.count / 10)}
+                currentPage={currentPage}
+              />
+            </>
+          ) : (
+            <>no data</>
+          )}
         </div>
-      </main>
-
-      <footer>
-        <CallError />
-      </footer>
-    </div>
+      ) : (
+        <Loader width={400} />
+      )}
+      <Outlet />
+    </main>
   );
 };
 

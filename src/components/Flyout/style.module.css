@@ -1,0 +1,35 @@
+.flyoutWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  left: 0;
+  bottom: 0;
+}
+
+.flyoutBody {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  padding: 5px 5px 15px 5px;
+  border: 1px solid var(--border-color);
+}
+
+.flyoutContent {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flyoutButtonsBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
