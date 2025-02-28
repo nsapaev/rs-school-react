@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { DetailsFetchResultInterface } from '../../types/types';
 import style from './style.module.css';
@@ -12,6 +13,8 @@ const DownloadFile: React.FC<DownloadFilePropsInterface> = ({
   const data: DetailsFetchResultInterface[] = useAppSelector(
     (state) => state.people?.selectedCards
   );
+
+  const [file, setFile] = useState<string>('');
 
   const downloadCSV = () => {
     const csvString = [
@@ -40,20 +43,22 @@ const DownloadFile: React.FC<DownloadFilePropsInterface> = ({
 
     const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
 
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    return URL.createObjectURL(blob);
   };
 
+  useEffect(() => {
+    setFile(downloadCSV());
+  }, [data]);
+
   return (
-    <button className={style.downloadButton} onClick={downloadCSV}>
+    <a
+      className={style.downloadButton}
+      href={file}
+      onClick={downloadCSV}
+      download={fileName}
+    >
       Download
-    </button>
+    </a>
   );
 };
 
