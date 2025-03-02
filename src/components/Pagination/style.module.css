@@ -18,11 +18,9 @@
 }
 
 .pagination__item:hover {
-  background-color: #ffde31;
+  background-color: var(--hover-color);
 }
-.pagination__item:active {
-  background-color: #ffde31;
-}
+
 .pagination__item_active {
-  background-color: #ffde31;
+  background-color: var(--hover-color);
 }
