@@ -1,5 +1,7 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../state/hooks';
 import { DetailsFetchResultInterface } from '../../types/types';
 import style from './style.module.css';
 

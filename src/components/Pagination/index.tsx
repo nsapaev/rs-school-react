@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './style.module.css';
 import { setCurrentPage } from '../../features/people/people-slice';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch } from '../../state/hooks';
 interface PaginationPropsInterface {
   pageCount: number;
   currentPage: number;

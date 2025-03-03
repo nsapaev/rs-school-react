@@ -1,3 +1,4 @@
+'use client';
 import React, { useContext } from 'react';
 import { SearchComponent } from '../SearchComponent';
 import { ThemeContext } from '../../contexts/theme-context';

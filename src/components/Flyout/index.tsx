@@ -1,5 +1,6 @@
+'use client';
 import style from './style.module.css';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { unselectAllCards } from '../../features/people/people-slice';
 import { DownloadFile } from '../DownloadFile';
 

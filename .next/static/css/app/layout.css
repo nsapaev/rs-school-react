@@ -1,0 +1,228 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/global.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+[data-theme='dark-mode'] {
+  --card-bg-color: #9db2bf;
+  --bg-color: #27374d;
+  --text-color: #27374d;
+  --border-color: #526d82;
+  --button-color: #f08a5d;
+  --hover-color: #dde6ed;
+}
+
+[data-theme='light-mode'] {
+  --card-bg-color: #b1c29e;
+  --bg-color: #fce7c8;
+  --text-color: #27445d;
+  --border-color: #fada7a;
+  --button-color: #f0a04b;
+  --hover-color: #fada7a;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 50px 15px;
+}
+
+.main-page {
+  display: flex;
+  gap: 20px;
+}
+
+.body {
+  background: var(--bg-color);
+}
+
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/Flyout/style.module.css ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+.style_flyoutWrapper__dpgJb {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  bottom: 0;
+}
+
+.style_flyoutBody__t__vS {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  padding: 5px 5px 15px 5px;
+  border: 1px solid var(--border-color);
+}
+
+.style_flyoutContent__wTIzE {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.style_flyoutButtonsBlock__99VNj {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/DownloadFile/style.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************/
+.style_downloadButton__l1Dnp {
+  width: 110px;
+  background-color: var(--button-color);
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  height: 45px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/SearchComponent/style.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+.style_container__VbhWP {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.style_input__Zu9MD {
+  width: 300px;
+  height: 50px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: var(--text-color);
+  /* border: 1px solid var(--border-color); */
+}
+
+.style_input__Zu9MD::placeholder {
+  color: var(--text-color);
+}
+
+.style_customButton__oarX3 {
+  cursor: pointer;
+  width: 100px;
+  background: var(--button-color);
+  height: 50px;
+  padding: 0px 10px 0px 10px;
+  gap: 10px;
+  border-radius: 4px;
+  opacity: 0px;
+  border: none;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/components/Header/style.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
+header {
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 10px;
+}
+
+button {
+  background-color: var(--button-color);
+  color: var(--text-color);
+  border: 1px solid var(--hover-color);
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -1,20 +1,22 @@
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+'use client';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import style from './style.module.css';
 import { Loader } from '../Loader';
 import { useFetchPeopleQuery } from '../../api/people-api-slice';
 
 export const Details: React.FC = () => {
-  const params = useParams();
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const { push } = useRouter();
+  const detailsParams = useSearchParams().get('details');
+  const searchParams = useSearchParams().get('search');
+
   const { data, isFetching, isError, error } = useFetchPeopleQuery({
     page: 1,
-    search: String(params.detailId),
+    search: String(detailsParams),
   });
 
   const handleCloseDetails = () => {
-    navigate({ pathname: '/', search: searchParams.toString() });
+    push(`/${searchParams ? `?search=${searchParams}` : ''}`);
   };
 
   if (isError) {
@@ -27,7 +29,7 @@ export const Details: React.FC = () => {
 
   return (
     <>
-      {data?.results && (
+      {!!data?.results.length && (
         <div className={style.details__open}>
           <div>
             <b> name: </b> {data.results[0].name}

@@ -1,10 +1,10 @@
 .details__open {
-  flex: 0 0 50%;
+  flex: 0 0 300px;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  width: 500px;
+  width: 300px;
   height: 500px;
   overflow: hidden;
   background-color: var(--card-bg-color);
@@ -18,12 +18,15 @@
 .close {
   cursor: pointer;
   position: absolute;
-  left: 45%;
-  top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 15px;
+  top: 15px;
   border: none;
   background-color: var(--button-color);
   color: var(--text-color);
-  width: 60px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 5px;
 }

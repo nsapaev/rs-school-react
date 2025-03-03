@@ -1,11 +1,16 @@
 import React from 'react';
 import Tube from '../../assets/tube-spinner.svg';
+import Image from 'next/image';
 
 interface LoaderInterface {
   width?: number;
+  height?: number;
 }
 
-export const Loader: React.FC<LoaderInterface> = ({ width = 900 }) => {
+export const Loader: React.FC<LoaderInterface> = ({
+  width = 900,
+  height = 500,
+}) => {
   return (
     <div
       data-testid="loader"
@@ -19,7 +24,7 @@ export const Loader: React.FC<LoaderInterface> = ({ width = 900 }) => {
         justifyContent: 'center',
       }}
     >
-      <img src={Tube} alt="" />
+      <Image src={Tube} alt="Loading..." width={width} height={height} />
     </div>
   );
 };
