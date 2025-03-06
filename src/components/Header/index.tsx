@@ -1,27 +1,13 @@
-'use client';
-import React, { useContext } from 'react';
-import { SearchComponent } from '../SearchComponent';
-import { ThemeContext } from '../../contexts/theme-context';
-import { CallError } from '../CallError';
-
 import './style.css';
+import { SearchComponent } from '../SearchComponent';
+import { CallError } from '../CallError';
+import ChangeTheme from '../ChangeTheme';
 
-const Header: React.FC = () => {
-  const themeContext = useContext(ThemeContext);
-
-  const clickHandler = () => {
-    if (themeContext) {
-      localStorage.setItem('isDarkMode', String(!themeContext.isDarkMode));
-      themeContext.setIsDarkMode(!themeContext.isDarkMode);
-    }
-  };
-
+const Header = () => {
   return (
     <header>
       <SearchComponent />
-      <button onClick={clickHandler}>
-        {themeContext?.isDarkMode ? 'Light mode' : 'Dark mode'}
-      </button>
+      <ChangeTheme />
       <CallError />
     </header>
   );

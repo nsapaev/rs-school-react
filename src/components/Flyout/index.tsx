@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { unselectAllCards } from '../../features/people/people-slice';
 import { DownloadFile } from '../DownloadFile';
 
-const Flyout: React.FC = () => {
+const Flyout = () => {
   const selectedCardsCount = useAppSelector(
     (state) => state.people.selectedCards
   ).length;
@@ -17,7 +17,7 @@ const Flyout: React.FC = () => {
   }
 
   return (
-    <div className={style.flyoutWrapper}>
+    <div data-testid="flyout-testid" className={style.flyoutWrapper}>
       <div className={style.flyoutBody}>
         <div className={style.flyoutContent}>
           selected items: {selectedCardsCount}

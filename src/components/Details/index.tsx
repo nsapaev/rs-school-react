@@ -28,7 +28,7 @@ export const Details: React.FC = () => {
   }
 
   return (
-    <>
+    <div data-testid="details-wrapper-testid">
       {!!data?.results.length && (
         <div className={style.details__open}>
           <div>
@@ -57,7 +57,7 @@ export const Details: React.FC = () => {
           </div>
 
           <button
-            data-testid="close-button"
+            data-testid="close-details-button-testid"
             className={style.close}
             onClick={handleCloseDetails}
           >
@@ -65,6 +65,6 @@ export const Details: React.FC = () => {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };

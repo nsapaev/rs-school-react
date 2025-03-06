@@ -10,7 +10,7 @@ import { useFetchPeopleQuery } from '../../api/people-api-slice';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { changeSearchValue } from '../../features/people/people-slice';
 
-const MainPage: React.FC = () => {
+const MainPage = () => {
   const dispatch = useAppDispatch();
 
   const searchValue = useAppSelector((store) => store.people.value);
@@ -20,12 +20,6 @@ const MainPage: React.FC = () => {
     page: currentPage,
     search: searchValue,
   });
-
-  useEffect(() => {
-    // navigate(
-    //   `?search=${localStorage.getItem('search') || searchValue}&page=${currentPage}`
-    // );
-  }, [searchValue, currentPage]);
 
   useEffect(() => {
     dispatch(changeSearchValue(localStorage.getItem('search') || ''));
