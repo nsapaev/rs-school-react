@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 const NotFoundPage = () => {
@@ -13,9 +15,9 @@ const NotFoundPage = () => {
       }}
     >
       <h1>
-        <b> 404 </b>
+        <b> 404</b>
       </h1>
-      <i>Page: Not Found</i>
+      <i>This page can`t find</i>
     </div>
   );
 };
