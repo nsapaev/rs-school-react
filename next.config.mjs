@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  output: 'export ',
+  output: 'export',
   basePath: '/rs-school-react',
   reactStrictMode: true,
   images: {
