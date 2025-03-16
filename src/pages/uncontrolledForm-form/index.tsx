@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setUncontrolledForm } from '../../features/forms/forms';
 import { FormInterface } from '../../features/forms/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { userSchema } from './helpers';
+import { signUpSchema } from '../../helpers/zodSchemas/signUpSchema';
 
 import './style.css';
 
 const UncontrolledForm = () => {
+  const navigete = useNavigate();
   const dispatch = useAppDispatch();
   const uncontrolledFormData = useAppSelector(
     (state) => state.forms.uncontrolledForm
@@ -84,7 +85,7 @@ const UncontrolledForm = () => {
       password: refs.passwordRef.current?.value as string,
       confirmPassword: refs.confirmPasswordRef.current?.value as string,
     };
-    const validationResult = userSchema.safeParse(sendData);
+    const validationResult = signUpSchema.safeParse(sendData);
 
     if (!validationResult.success) {
       const errors = validationResult.error.format();
@@ -228,6 +229,7 @@ const UncontrolledForm = () => {
         if (refs.successSubmittedFormMessageRef.current) {
           refs.successSubmittedFormMessageRef.current.style.display = 'block';
         }
+        navigete('/');
       });
     }
   };
@@ -355,6 +357,7 @@ const UncontrolledForm = () => {
             <b>Choose your Country</b>
           </legend>
           <input
+            onChange={changeSubmitButtonState}
             name="selectedCountry"
             type="text"
             list="countries"

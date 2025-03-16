@@ -1,5 +1,38 @@
+* {
+  font-family: sans-serif;
+}
 .App {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.uncontrolled-form {
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: violet;
+}
+
+.uncontrolled-form b {
+  background-color: yellow;
+  padding: 5px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.controlled-form {
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: tomato;
+}
+
+.controlled-form b {
+  background-color: yellow;
+  padding: 5px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 10px;
 }
