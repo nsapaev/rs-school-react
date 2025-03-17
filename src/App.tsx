@@ -18,7 +18,7 @@ function App() {
       <Link to={'/react-hook-form'}> react-hook-form </Link>
 
       {
-        <div className="React hook form">
+        <div className="uncontrolled-form">
           <b>Uncontrolled form </b>
           <div> name: {reactHookForm.name}</div>
           <div> age: {reactHookForm.age}</div>
