@@ -4,70 +4,40 @@ import { useAppSelector } from './state/hooks';
 import { FormInterface } from './features/forms/types';
 
 function App() {
-  const uncontrolledForm: FormInterface = useAppSelector(
-    (state) => state.forms.uncontrolledForm
-  );
-
-  const reactHookForm: FormInterface = useAppSelector(
-    (state) => state.forms.reactHookForm
-  );
+  const forms = useAppSelector((state) => state.forms.forms);
 
   return (
     <div className="App">
       <Link to={'/uncontrolled-form'}> simple-form </Link>
       <Link to={'/react-hook-form'}> react-hook-form </Link>
 
-      {
-        <div className="controlled-form">
-          <b>React hook form form </b>
-          <div> name: {reactHookForm.name}</div>
-          <div> age: {reactHookForm.age}</div>
-          <div> email: {reactHookForm.email}</div>
-          <div> gender: {reactHookForm.gender}</div>
-          <div> pass: {reactHookForm.password}</div>
-          <div> confirm pass: {reactHookForm.confirmPassword}</div>
-          <div> selected country: {reactHookForm.selectedCountry}</div>
-          <div> countries: {reactHookForm.countries?.join(', ')}</div>
-          {reactHookForm.image && (
-            <div>
-              <img
-                style={{
-                  width: '200px',
-                  height: '200px',
-                }}
-                src={reactHookForm.image}
-                alt="avatar"
-              />
+      {!!forms.length && (
+        <div className="forms">
+          {forms.map((form: FormInterface) => (
+            <div className="form">
+              <div> name: {form.name}</div>
+              <div> age: {form.age}</div>
+              <div> email: {form.email}</div>
+              <div> gender: {form.gender}</div>
+              <div> pass: {form.password}</div>
+              <div> confirm pass: {form.confirmPassword}</div>
+              <div> selected country: {form.selectedCountry}</div>
+              {form.image && (
+                <div>
+                  <img
+                    style={{
+                      width: '130px',
+                      height: '130px',
+                    }}
+                    src={form.image}
+                    alt="avatar"
+                  />
+                </div>
+              )}
             </div>
-          )}
+          ))}
         </div>
-      }
-
-      {
-        <div className="uncontrolled-form">
-          <b>Uncontrolled form </b>
-          <div> name: {uncontrolledForm.name}</div>
-          <div> age: {uncontrolledForm.age}</div>
-          <div> email: {uncontrolledForm.email}</div>
-          <div> gender: {uncontrolledForm.gender}</div>
-          <div> pass: {uncontrolledForm.password}</div>
-          <div> confirm pass: {uncontrolledForm.confirmPassword}</div>
-          <div> selected country: {uncontrolledForm.selectedCountry}</div>
-          <div> countries: {uncontrolledForm.countries?.join(', ')}</div>
-          {uncontrolledForm.image && (
-            <div>
-              <img
-                style={{
-                  width: '200px',
-                  height: '200px',
-                }}
-                src={uncontrolledForm.image}
-                alt="avatar"
-              />
-            </div>
-          )}
-        </div>
-      }
+      )}
     </div>
   );
 }

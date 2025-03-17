@@ -13,12 +13,11 @@ interface FormInterface {
   accept: boolean;
   image: string;
   selectedCountry: string;
-  countries?: string[];
 }
 
 interface FormsInterface {
-  reactHookForm: FormInterface;
-  uncontrolledForm: FormInterface;
+  forms: Array<FormInterface>;
+  countries: Array<string>;
 }
 
 export type { FormsInterface, FormInterface };

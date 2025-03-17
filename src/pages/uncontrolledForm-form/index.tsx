@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { setUncontrolledForm } from '../../features/forms/forms';
+import { setForm } from '../../features/forms/forms';
 import { FormInterface } from '../../features/forms/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { signUpSchema } from '../../helpers/zodSchemas/signUpSchema';
@@ -11,9 +11,7 @@ import { fileToBase64 } from '../../helpers/fileToBase64';
 const UncontrolledForm = () => {
   const navigete = useNavigate();
   const dispatch = useAppDispatch();
-  const uncontrolledFormData = useAppSelector(
-    (state) => state.forms.uncontrolledForm
-  );
+  const countries = useAppSelector((state) => state.forms.countries);
 
   const refs = {
     nameRef: useRef<HTMLInputElement>(null),
@@ -66,7 +64,7 @@ const UncontrolledForm = () => {
   const fetch = async (data: FormInterface) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        dispatch(setUncontrolledForm(data));
+        dispatch(setForm(data));
         return resolve('Everything is good');
       }, 1500);
     });
@@ -370,7 +368,7 @@ const UncontrolledForm = () => {
           />
           <div className="error-message"></div>
           <datalist id="countries">
-            {uncontrolledFormData.countries?.map((country) => {
+            {countries.map((country) => {
               return <option value={country}>{country}</option>;
             })}
           </datalist>

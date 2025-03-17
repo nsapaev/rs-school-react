@@ -7,7 +7,7 @@ import type { FieldValues } from 'react-hook-form';
 import { FormInterface } from '../../features/forms/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { signUpSchema } from '../../helpers/zodSchemas/signUpSchema';
-import { setReactHookForm } from '../../features/forms/forms';
+import { setForm } from '../../features/forms/forms';
 import { fileToBase64 } from '../../helpers/fileToBase64';
 
 type TSignUpSchema = z.infer<typeof signUpSchema>;
@@ -15,12 +15,10 @@ type TSignUpSchema = z.infer<typeof signUpSchema>;
 const ReactHookForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const reactHookForm: FormInterface = useAppSelector(
-    (state) => state.forms.reactHookForm
-  );
+  const countries = useAppSelector((state) => state.forms.countries);
   const {
     register,
-    formState: { errors, isDirty, isValid },
+    formState: { errors },
     handleSubmit,
     reset,
   } = useForm<TSignUpSchema>({
@@ -31,7 +29,7 @@ const ReactHookForm = () => {
   const onSubmit = async (data: TSignUpSchema) => {
     const image = await fileToBase64(data.image[0]);
 
-    dispatch(setReactHookForm({ ...data, image: image } as FormInterface ));
+    dispatch(setForm({ ...data, image: image } as FormInterface));
     navigate('/');
     reset();
   };
@@ -168,7 +166,7 @@ const ReactHookForm = () => {
           )}
 
           <datalist id="countries">
-            {reactHookForm.countries?.map((country) => {
+            {countries.map((country) => {
               return <option value={country}>{country}</option>;
             })}
           </datalist>
