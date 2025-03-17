@@ -8,7 +8,9 @@ function App() {
     (state) => state.forms.uncontrolledForm
   );
 
-  console.log('uncontrolledForm', uncontrolledForm);
+  const reactHookForm: FormInterface = useAppSelector(
+    (state) => state.forms.reactHookForm
+  );
 
   return (
     <div className="App">
@@ -16,16 +18,16 @@ function App() {
       <Link to={'/react-hook-form'}> react-hook-form </Link>
 
       {
-        <div className="uncontrolled-form">
+        <div className="React hook form">
           <b>Uncontrolled form </b>
-          <div> name: {uncontrolledForm.name}</div>
-          <div> age: {uncontrolledForm.age}</div>
-          <div> email: {uncontrolledForm.email}</div>
-          <div> gender: {uncontrolledForm.gender}</div>
-          <div> pass: {uncontrolledForm.password}</div>
-          <div> confirm pass: {uncontrolledForm.confirmPassword}</div>
-          <div> selected country: {uncontrolledForm.selectedCountry}</div>
-          <div> countries: {uncontrolledForm.countries?.join(', ')}</div>
+          <div> name: {reactHookForm.name}</div>
+          <div> age: {reactHookForm.age}</div>
+          <div> email: {reactHookForm.email}</div>
+          <div> gender: {reactHookForm.gender}</div>
+          <div> pass: {reactHookForm.password}</div>
+          <div> confirm pass: {reactHookForm.confirmPassword}</div>
+          <div> selected country: {reactHookForm.selectedCountry}</div>
+          <div> countries: {reactHookForm.countries?.join(', ')}</div>
         </div>
       }
 
