@@ -8,6 +8,7 @@ import { FormInterface } from '../../features/forms/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { signUpSchema } from '../../helpers/zodSchemas/signUpSchema';
 import { setReactHookForm } from '../../features/forms/forms';
+import { fileToBase64 } from '../../helpers/fileToBase64';
 
 type TSignUpSchema = z.infer<typeof signUpSchema>;
 
@@ -28,7 +29,9 @@ const ReactHookForm = () => {
   });
 
   const onSubmit = async (data: TSignUpSchema) => {
-    dispatch(setReactHookForm(data as FormInterface));
+    const image = await fileToBase64(data.image[0]);
+
+    dispatch(setReactHookForm({ ...data, image: image } as FormInterface ));
     navigate('/');
     reset();
   };

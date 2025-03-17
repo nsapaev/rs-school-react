@@ -18,8 +18,8 @@ function App() {
       <Link to={'/react-hook-form'}> react-hook-form </Link>
 
       {
-        <div className="uncontrolled-form">
-          <b>Uncontrolled form </b>
+        <div className="controlled-form">
+          <b>React hook form form </b>
           <div> name: {reactHookForm.name}</div>
           <div> age: {reactHookForm.age}</div>
           <div> email: {reactHookForm.email}</div>
@@ -28,12 +28,24 @@ function App() {
           <div> confirm pass: {reactHookForm.confirmPassword}</div>
           <div> selected country: {reactHookForm.selectedCountry}</div>
           <div> countries: {reactHookForm.countries?.join(', ')}</div>
+          {reactHookForm.image && (
+            <div>
+              <img
+                style={{
+                  width: '200px',
+                  height: '200px',
+                }}
+                src={reactHookForm.image}
+                alt="avatar"
+              />
+            </div>
+          )}
         </div>
       }
 
       {
-        <div className="controlled-form">
-          <b>Controlled form </b>
+        <div className="uncontrolled-form">
+          <b>Uncontrolled form </b>
           <div> name: {uncontrolledForm.name}</div>
           <div> age: {uncontrolledForm.age}</div>
           <div> email: {uncontrolledForm.email}</div>
@@ -42,6 +54,18 @@ function App() {
           <div> confirm pass: {uncontrolledForm.confirmPassword}</div>
           <div> selected country: {uncontrolledForm.selectedCountry}</div>
           <div> countries: {uncontrolledForm.countries?.join(', ')}</div>
+          {uncontrolledForm.image && (
+            <div>
+              <img
+                style={{
+                  width: '200px',
+                  height: '200px',
+                }}
+                src={uncontrolledForm.image}
+                alt="avatar"
+              />
+            </div>
+          )}
         </div>
       }
     </div>

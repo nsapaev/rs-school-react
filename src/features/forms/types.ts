@@ -11,7 +11,7 @@ interface FormInterface {
   confirmPassword: string;
   gender: 'male' | 'female';
   accept: boolean;
-  image: File | null;
+  image: string;
   selectedCountry: string;
   countries?: string[];
 }

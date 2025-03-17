@@ -8,7 +8,7 @@ const defaultForm: FormInterface = {
   password: '',
   gender: 'male',
   accept: false,
-  image: null,
+  image: '',
   countries: [],
   selectedCountry: '',
   confirmPassword: '',
@@ -29,6 +29,7 @@ const formsSlice = createSlice({
     },
     setReactHookForm(state, action: PayloadAction<FormInterface>) {
       state.reactHookForm = action.payload;
+      state.reactHookForm.countries?.push(action.payload.selectedCountry);
     },
   },
 });

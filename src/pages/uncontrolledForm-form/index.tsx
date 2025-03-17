@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { signUpSchema } from '../../helpers/zodSchemas/signUpSchema';
 
 import './style.css';
+import { fileToBase64 } from '../../helpers/fileToBase64';
 
 const UncontrolledForm = () => {
   const navigete = useNavigate();
@@ -74,14 +75,14 @@ const UncontrolledForm = () => {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const sendData: FormInterface = {
+    const sendData = {
       name: (refs.nameRef.current?.value || '') as string,
       age: +refs.ageRef.current!.value || NaN,
       email: (refs.emailRef.current?.value || '') as string,
       accept: refs.acceptRef.current?.checked as boolean,
       gender: refs.genderRef1.current?.checked ? 'male' : 'female',
       selectedCountry: (refs.selectedCountryRef.current?.value || '') as string,
-      image: refs.uploadFileRef.current?.files![0] as File | null,
+      image: refs.uploadFileRef.current?.files,
       password: refs.passwordRef.current?.value as string,
       confirmPassword: refs.confirmPasswordRef.current?.value as string,
     };
@@ -220,7 +221,12 @@ const UncontrolledForm = () => {
         refs.loadingRef.current.style.display = 'block';
       }
 
-      const message = fetch(sendData);
+      const imageBase64 = await fileToBase64(sendData.image![0]);
+
+      const message = fetch({
+        ...sendData,
+        image: imageBase64,
+      } as FormInterface);
 
       message.then(() => {
         if (refs.loadingRef.current) {
@@ -229,7 +235,6 @@ const UncontrolledForm = () => {
         if (refs.successSubmittedFormMessageRef.current) {
           refs.successSubmittedFormMessageRef.current.style.display = 'block';
         }
-        navigete('/');
       });
     }
   };
