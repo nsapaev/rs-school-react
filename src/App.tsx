@@ -1,7 +1,13 @@
-import './App.scss';
+import { Header } from './components/Header';
+import { MainPage } from './pages/mainPage';
 
-function App() {
-  return <></>;
-}
+const App = () => {
+  return (
+    <div className="app-wrapper">
+      <Header />
+      <MainPage />
+    </div>
+  );
+};
 
 export default App;
